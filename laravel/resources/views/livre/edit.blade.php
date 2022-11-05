@@ -44,11 +44,10 @@
             <div class="form-group mb-3">
                 <div>
                     <label for="image">Image de couverture</label>
-                    <input type="file" class='form-control' id="image" name="image"
-                        data-browse-on-zone-click="true">
+                    <input type="file" class='form-control' id="image" name="image">
                 </div>
-                <div class="d-flex items-center columns">
-                    <p>Aperçu : </p>
+                <div class="d-flex items-center columns Regular shadow">
+                    <p>Couverture : </p>
                     <div class="previewContainer col-2">
                         <img class="preview" src="{{ Storage::url($livre->image) }}" alt="Cover">
                     </div>

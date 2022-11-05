@@ -24,6 +24,16 @@ class LivreController extends Controller
         }
 
         /**
+         * return all book in json format
+         *
+         */
+    public function indexApi()
+    {
+        $livres = Livre::all();
+        return response()->json($livres);
+    }
+
+        /**
          * return a book
          *
          */
