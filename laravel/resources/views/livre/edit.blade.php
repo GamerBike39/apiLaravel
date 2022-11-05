@@ -42,35 +42,39 @@
                     value="{{ $livre->desc }}">
             </div>
             <div class="form-group mb-3">
-                <label for="image">Image de couverture</label>
-                <input type="file" class='form-control' id="image" name="image">
-                <div class="previewContainer">
-                    <img class="preview" src="{{ Storage::url($livre->image) }}" alt="Cover">
+                <div>
+                    <label for="image">Image de couverture</label>
+                    <input type="file" class='form-control' id="image" name="image"
+                        data-browse-on-zone-click="true">
+                </div>
+                <div class="d-flex items-center columns">
+                    <p>Aperçu : </p>
+                    <div class="previewContainer col-2">
+                        <img class="preview" src="{{ Storage::url($livre->image) }}" alt="Cover">
+                    </div>
                 </div>
             </div>
+
+            <div class="form-group mb-3">
+                <label for="price">prix :</label>
+                <input type="number" class="form-control" id="price" placeholder="prix du livre" name="price"
+                    value="{{ $livre->price }}">
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+        </form>
+
+        <a href="{{ route('livre.index') }}">Retour à la liste des livres</a>
+    </div>
     </div>
 
-    <div class="form-group mb-3">
-        <label for="price">prix :</label>
-        <input type="number" class="form-control" id="price" placeholder="prix du livre" name="price"
-            value="{{ $livre->price }}">
-    </div>
-
-
-
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-
-    </form>
-
-    <a href="{{ route('livre.index') }}">Retour à la liste des livres</a>
-    </div>
-
-    {{-- preview image input file without ajax --}}
     <script>
         const image = document.getElementById('image');
         const previewContainer = document.querySelector('.previewContainer');
         const preview = document.querySelector('.preview');
-
         image.addEventListener('change', function() {
             const file = this.files[0];
 
