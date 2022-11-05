@@ -44,23 +44,53 @@
             <div class="form-group mb-3">
                 <label for="image">Image de couverture</label>
                 <input type="file" class='form-control' id="image" name="image">
+                <div class="previewContainer">
+                    <img class="preview" src="{{ Storage::url($livre->image) }}" alt="Cover">
+                </div>
             </div>
-
-
-
-            <div class="form-group mb-3">
-                <label for="price">prix :</label>
-                <input type="number" class="form-control" id="price" placeholder="prix du livre" name="price"
-                    value="{{ $livre->price }}">
-            </div>
-
-
-
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-
-        </form>
-
-        <a href="{{ route('livre.index') }}">Retour à la liste des livres</a>
     </div>
+
+    <div class="form-group mb-3">
+        <label for="price">prix :</label>
+        <input type="number" class="form-control" id="price" placeholder="prix du livre" name="price"
+            value="{{ $livre->price }}">
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+    </form>
+
+    <a href="{{ route('livre.index') }}">Retour à la liste des livres</a>
+    </div>
+
+    {{-- preview image input file without ajax --}}
+    <script>
+        const image = document.getElementById('image');
+        const previewContainer = document.querySelector('.previewContainer');
+        const preview = document.querySelector('.preview');
+
+        image.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                previewContainer.style.display = 'block';
+                preview.style.display = 'block';
+
+                reader.addEventListener('load', function() {
+                    preview.setAttribute('src', this.result);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = null;
+                preview.style.display = null;
+                preview.setAttribute('src', '');
+            }
+        });
+    </script>
 
 @endsection
