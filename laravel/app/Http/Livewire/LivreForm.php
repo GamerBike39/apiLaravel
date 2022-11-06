@@ -17,7 +17,7 @@ class LivreForm extends Component
         'livre.author' => 'required|string|min:3',
         'livre.desc' => 'required|string|min:3',
         'livre.price' => 'required|numeric|min:1',
-        // 'livre.image' => 'required',
+        'livre.image' => 'required',
     ];
 
     public function save()
@@ -27,29 +27,13 @@ class LivreForm extends Component
         $this->emit('livreSaved');
     }
 
-    // protected $listeners = ['livreSaved' => 'onLivreSaved'];
 
-    public function onLivreSaved()
-    {
-        $this->reset('editId');
-    }
-
-    public function update()
-    {
-        $this->validate();
-        $this->livre->save();
-        $this->emit('livreUpdated');
-    }
-
-
-
-
-
-
-    public function render()
+        public function render()
     {
         return view('livewire.livre-form');
     }
+
+
 
 
 

@@ -15,6 +15,7 @@ class LivresTable extends Component
     public string $orderField = 'title';
     public string $orderDirection = 'ASC';
     public int $editId = 0;
+    public array $selection = [];
 
 
     public function setOrderField(string $title)
@@ -27,15 +28,27 @@ class LivresTable extends Component
         }
     }
 
+
+    public function deleteLivres(array $id){
+        Livre::destroy($id);
+        session()->flash('success', 'Votre sélection à bien été supprimée');
+        $this->selection = [];
+    }
+
+
+
     public function startEdit(int $id)
     {
         $this->editId = $id;
     }
 
+    protected $listeners = ['livreSaved' => 'onLivreSaved'];
 
-
-
-
+    public function onLivreSaved()
+    {
+        session()->flash('success', 'Livre bien mis à jour.');
+        $this->reset('editId');
+    }
 
 
     public function render()
@@ -64,10 +77,19 @@ class LivresTable extends Component
         return 'livewire.pagination';
     }
 
-    public function onLivreSaved()
+    public function selection()
     {
-        $this->reset('editId');
+        $this->emit('livresSelected', $this->selection);
     }
+
+    public function livresSelected($livres)
+    {
+        $this->selection = $livres;
+    }
+
+
+
+
 
 
 }

@@ -1,7 +1,7 @@
 @if ($name == 'price')
-    <th wire:click="setOrderField('{{ $name }}')" class="col-1 text-center">
+    <th wire:click="setOrderField('{{ $name }}')" class="col-1 text-center click">
     @else
-    <th wire:click="setOrderField('{{ $name }}')" class="col-2">
+    <th wire:click="setOrderField('{{ $name }}')" class="col-2 click">
 @endif
 {{ $slot }}
 @if ($visible)

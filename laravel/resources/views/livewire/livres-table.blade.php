@@ -1,4 +1,13 @@
-<div class="container mt-5">
+<div x-data="{ selection: @entangle('selection').defer }" class="container mt-5">
+    {{-- <span x-html="JSON.stringify(selection)"></span> --}}
+
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
     <h1>Liste des livres</h1>
 
 
@@ -14,6 +23,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th>
+                        <button class="btn btn-danger" x-show="selection.length > 0"
+                            x-on:click="$wire.deleteLivres(selection)">Supprimer</button>
+                    </th>
                     <x-table-header :direction="$orderDirection" name="title" :field='$orderField'>Titre
                     </x-table-header>
                     <x-table-header :direction="$orderDirection" name="author" :field='$orderField'>Auteur
@@ -28,6 +41,9 @@
             <tbody class="empty">
                 @foreach ($livres as $livre)
                     <tr>
+                        <td>
+                            <input type="checkbox" x-model="selection" value="{{ $livre->id }}">
+                        </td>
                         <td class="align-middle">{{ $livre->title }}</td>
                         <td class="align-middle">{{ $livre->author }}</td>
                         <td class="align-middle"><img src="{{ Storage::url($livre->image) }}" alt="Cover"
@@ -70,4 +86,29 @@
         </div>
 
     </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Confirm</h5><button type="button" class="close"
+                    data-dismiss="modal" aria-label="Close"><span aria-hidden="true close-btn">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete?</p>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary close-btn"
+                    data-dismiss="modal">Close</button><button type="button" wire:click.prevent="delete()"
+                    class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </div>
