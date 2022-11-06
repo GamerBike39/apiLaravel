@@ -11,14 +11,14 @@
             </div>
         </div>
 
-        <table class="table table-striped">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <x-table-header :direction="$orderDirection" name="title" :field='$orderField'>Titre
                     </x-table-header>
                     <x-table-header :direction="$orderDirection" name="author" :field='$orderField'>Auteur
                     </x-table-header>
-                    <th class='col-1'>Image</th>
+                    <th class='col-1 text-center'>Image</th>
                     <th>Description</th>
                     <x-table-header :direction="$orderDirection" name="price" :field='$orderField'>Prix
                     </x-table-header>
@@ -30,9 +30,10 @@
                     <tr>
                         <td class="align-middle">{{ $livre->title }}</td>
                         <td class="align-middle">{{ $livre->author }}</td>
-                        <td class="align-middle"><img src="{{ Storage::url($livre->image) }}" alt="Cover"></td>
+                        <td class="align-middle"><img src="{{ Storage::url($livre->image) }}" alt="Cover"
+                                class="coverImg"></td>
                         <td class="align-middle">{{ $livre->desc }}</td>
-                        <td class="align-middle">{{ $livre->price }} €</td>
+                        <td class="align-middle text-center">{{ $livre->price }} €</td>
                         <td class="align-middle">
                             <form action="{{ url('livre/' . $livre->id) }}" method="POST">
                                 @csrf
@@ -43,9 +44,17 @@
                                     <button type="submit" class="btn btn-danger">🗑️</button>
                                 </div>
                             </form>
-
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" wire:click="startEdit({{ $livre->id }})">Editer</button>
                         </td>
                     </tr>
+
+                    @if ($editId === $livre->id)
+                        <tr>
+                            <livewire:livre-form :livre="$livre" :key='$livre->id' />
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

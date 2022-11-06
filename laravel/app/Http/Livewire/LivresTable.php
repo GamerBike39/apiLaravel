@@ -14,6 +14,7 @@ class LivresTable extends Component
     public string $search = '';
     public string $orderField = 'title';
     public string $orderDirection = 'ASC';
+    public int $editId = 0;
 
 
     public function setOrderField(string $title)
@@ -26,13 +27,19 @@ class LivresTable extends Component
         }
     }
 
+    public function startEdit(int $id)
+    {
+        $this->editId = $id;
+    }
+
+
+
 
 
 
 
     public function render()
     {
-        // multiple search
         $livres = Livre::where('title', 'like', '%' . $this->search . '%')
             ->orWhere('author', 'like', '%' . $this->search . '%')
             ->orWhere('desc', 'like', '%' . $this->search . '%')
@@ -57,6 +64,10 @@ class LivresTable extends Component
         return 'livewire.pagination';
     }
 
+    public function onLivreSaved()
+    {
+        $this->reset('editId');
+    }
 
 
 }
