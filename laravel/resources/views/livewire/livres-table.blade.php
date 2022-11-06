@@ -1,52 +1,64 @@
-    <div class="container mt-5">
-        <h1>Liste des livres</h1>
+<div class="container mt-5">
+    <h1>Liste des livres</h1>
 
 
-        <div class="row">
-            <div class="col-md-4">
-                <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher un livre"
-                    wire:model.debounce.300ms="search">
-                <div class="col-lg-1 my-3">
-                    <a class="btn btn-primary" href="{{ url('livre/create') }}">Ajouter </a>
-                </div>
+    <div class="row">
+        <div class="col-md-4 d-flex items-center gap-4">
+            <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher un livre"
+                wire:model.debounce.200ms="search">
+            <div class="col-lg-1 my-3">
+                <a class="btn btn-primary" href="{{ url('livre/create') }}">Ajouter </a>
             </div>
+        </div>
 
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <x-table-header :direction="$orderDirection" name="title" :field='$orderField'>Titre
+                    </x-table-header>
+                    <x-table-header :direction="$orderDirection" name="author" :field='$orderField'>Auteur
+                    </x-table-header>
+                    <th class='col-1'>Image</th>
+                    <th>Description</th>
+                    <x-table-header :direction="$orderDirection" name="price" :field='$orderField'>Prix
+                    </x-table-header>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="empty">
+                @foreach ($livres as $livre)
                     <tr>
-                        <th class="col-2">Titre</th>
-                        <th class="col-2">Auteur</th>
-                        <th class="overflow-hidden">Description</th>
-                        <th class='col-1'>Image</th>
-                        <th class='col-1'>Prix</th>
-                        <th class="text-center">Actions</th>
+                        <td class="align-middle">{{ $livre->title }}</td>
+                        <td class="align-middle">{{ $livre->author }}</td>
+                        <td class="align-middle"><img src="{{ Storage::url($livre->image) }}" alt="Cover"></td>
+                        <td class="align-middle">{{ $livre->desc }}</td>
+                        <td class="align-middle">{{ $livre->price }} €</td>
+                        <td class="align-middle">
+                            <form action="{{ url('livre/' . $livre->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="d-flex gap-2 px-3 align-middle">
+                                    <a class="btn btn-primary" href="{{ url('livre/' . $livre->id) }}">👀</a>
+                                    <a class="btn btn-primary" href="{{ route('livre.edit', $livre->id) }}">✍️</a>
+                                    <button type="submit" class="btn btn-danger">🗑️</button>
+                                </div>
+                            </form>
+
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($livres as $livre)
-                        <tr>
-                            <td class="align-middle">{{ $livre->title }}</td>
-                            <td class="align-middle">{{ $livre->author }}</td>
-                            <td class="align-middle">{{ $livre->desc }}</td>
-                            <td class="align-middle"><img src="{{ Storage::url($livre->image) }}" alt="Cover"></td>
-                            <td class="align-middle">{{ $livre->price }} €</td>
-                            <td class="align-middle">
-                                <form action="{{ url('livre/' . $livre->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class="d-flex gap-2 px-3 align-middle">
-                                        <a class="btn btn-primary" href="{{ url('livre/' . $livre->id) }}">👀</a>
-                                        <a class="btn btn-primary" href="{{ route('livre.edit', $livre->id) }}">✍️</a>
-                                        <button type="submit" class="btn btn-danger">🗑️</button>
-                                    </div>
-                                </form>
+                @endforeach
+            </tbody>
+        </table>
 
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <div class="d-flex justify-content-center item-center">
-                {{ $livres->links() }}
+        @if ($livres->isEmpty())
+            <div class="alert alert-danger">
+                <p>Aucun résultat pour la recherche "{{ $search }}"</p>
             </div>
+        @endif
+
+        <div class="d-flex justify-content-center item-center">
+            {{ $livres->links() }}
+        </div>
+
+    </div>
+</div>

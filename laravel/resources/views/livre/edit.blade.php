@@ -38,8 +38,9 @@
             </div>
             <div class="form-group mb-3">
                 <label for="desc">Description :</label>
-                <input type="text" class="form-control" id="desc" placeholder="Description du livre" name="desc"
-                    value="{{ $livre->desc }}">
+                {{-- <input type="text" class="form-control-area" id="desc" placeholder="Description du livre"
+                    name="desc" value="{{ $livre->desc }}"> --}}
+                <textarea class="form-control" id="desc" rows="3" name="desc">{{ $livre->desc }}</textarea>
             </div>
             <div class="form-group mb-3">
                 <div>

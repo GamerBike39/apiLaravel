@@ -3,6 +3,7 @@
 @props(['paginator'])
 
 @if ($paginator->hasPages())
+
     <nav>
         <ul class="pagination">
             {{-- Previous Page Link --}}
@@ -51,6 +52,11 @@
                 </li>
             @endif
         </ul>
+        <div class="d-flex justify-content-center item-center">
+            <p class="text-center">
+                {{ $paginator->firstItem() }} - {{ $paginator->lastItem() }} livres sur {{ $paginator->total() }}
+            </p>
+        </div>
     </nav>
 
 @endif

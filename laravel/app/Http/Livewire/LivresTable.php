@@ -12,6 +12,24 @@ class LivresTable extends Component
     use WithPagination;
 
     public string $search = '';
+    public string $orderField = 'title';
+    public string $orderDirection = 'ASC';
+
+
+    public function setOrderField(string $title)
+    {
+        if ($this->orderField === $title) {
+            $this->orderDirection = $this->orderDirection === 'ASC' ? 'DESC' : 'ASC';
+        } else {
+            $this->orderField = $title;
+            $this->orderDirection = 'ASC';
+        }
+    }
+
+
+
+
+
     public function render()
     {
         // multiple search
@@ -19,6 +37,7 @@ class LivresTable extends Component
             ->orWhere('author', 'like', '%' . $this->search . '%')
             ->orWhere('desc', 'like', '%' . $this->search . '%')
             ->orWhere('price', 'like', '%' . $this->search . '%')
+            ->orderBy($this->orderField, $this->orderDirection)
             // ->get();
             ->paginate(4);
         return view('livewire.livres-table', compact('livres'));
@@ -28,6 +47,8 @@ class LivresTable extends Component
     {
         return [
             'search' => ['except' => ''],
+            'orderField' => ['except' => 'title'],
+            'orderDirection' => ['except' => 'ASC'],
         ];
     }
 
@@ -35,6 +56,7 @@ class LivresTable extends Component
     {
         return 'livewire.pagination';
     }
+
 
 
 }
