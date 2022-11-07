@@ -23,6 +23,12 @@ class LivreController extends Controller
 
         }
 
+    public function indexPublic()
+    {
+            $livres = Livre::all();
+            return view('public.index', compact('livres'));
+        }
+
         /**
          * return all book in json format
          *

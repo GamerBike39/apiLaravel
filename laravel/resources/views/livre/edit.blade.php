@@ -57,8 +57,8 @@
 
             <div class="form-group mb-3">
                 <label for="price">prix :</label>
-                <input type="number" class="form-control" id="price" placeholder="prix du livre" name="price"
-                    value="{{ $livre->price }}">
+                <input type="number" class="form-control" id="price" placeholder="prix du livre" step="any"
+                    name="price" value="{{ $livre->price }}">
             </div>
 
 

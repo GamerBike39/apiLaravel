@@ -6,10 +6,13 @@ use App\Models\Livre;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class LivresTable extends Component
 {
 
     use WithPagination;
+
+
 
     public string $search = '';
     public string $orderField = 'title';
