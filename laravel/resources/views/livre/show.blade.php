@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
     <div class="container mt-5">
         <h1>{{ $livre->title }}</h1>
         <p><b>Auteur :</b> {{ $livre->author }}</p>
@@ -14,4 +13,4 @@
             <button type="submit" class="btn btn-danger">Supprimer</button>
         </form>
     </div>
-@endsection
+</x-app-layout>

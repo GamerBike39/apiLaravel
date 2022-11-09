@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Livre;
 use Illuminate\Http\Request;
+use App\Http\Resources\LivreApi;
 use Illuminate\Support\Facades\Storage;
 
 class LivreController extends Controller
@@ -22,6 +23,24 @@ class LivreController extends Controller
             return view('livre.index', compact('livres'));
 
         }
+
+    public function indexPublic()
+    {
+            $livres = Livre::all();
+            return view('public.index', compact('livres'));
+        }
+
+        /**
+         * return all book in json format
+         *
+         */
+    public function indexApi()
+    {
+        $livres = Livre::all();
+        // return LivreApi::collections($livres);
+        return response()->json($livres);
+
+    }
 
         /**
          * return a book
@@ -60,7 +79,6 @@ class LivreController extends Controller
                 'price' => 'required',
                 'image' => 'required'
             ]);
-
 
          $livre = new Livre([
             'title' => $request->get('title'),

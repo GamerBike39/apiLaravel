@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 
     <div class="container mt-5">
         <h1>Ajouter un livre</h1>
@@ -25,7 +24,8 @@
             </div>
             <div class="form-group mb-3">
                 <label for="desc">Description :</label>
-                <input type="text" class="form-control" id="desc" placeholder="Description du livre" name="desc">
+                <input type="text" class="form-control" id="desc" placeholder="Description du livre"
+                    name="desc">
             </div>
 
             <div class="form-group mb-3">
@@ -36,10 +36,11 @@
 
             <div class="form-group mb-3">
                 <label for="price">prix :</label>
-                <input type="number" class="form-control block" id="price" placeholder="prix du livre" name="price">
+                <input type="number" class="form-control block" id="price" placeholder="prix du livre"
+                    name="price">
             </div>
             <button type="submit" class="btn btn-primary">Enregister</button>
         </form>
     </div>
 
-@endsection
+</x-app-layout>
