@@ -34,7 +34,9 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
 
-                Route::get('/public', [LivreController::class, 'indexPublic'])->name('livre.indexPublic');
+                // Route::get('/public', [LivreController::class, 'indexPublic'])->name('livre.indexPublic');
+
+
 
 });
 
@@ -58,25 +60,22 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-             Route::controller(LivreController::class)->group(function () {
+            //  Route::controller(LivreController::class)->group(function () {
 
-                 Route::get('/livre', 'index')->name('livre.index');
-                 Route::get('/livre/create', 'create')->name('livre.create');
-                 Route::get('/livre/{id}', 'show')->name('livre.show');
-                 Route::get('/livre/{id}/edit', 'edit')->name('livre.edit');
-
-
-                 Route::post('/livre', 'store');
-                 Route::patch('/livre/{id}', 'update');
-                 Route::delete('/livre/{id}', 'destroy');
-
-                });
-
-                Route::controller(ImageController::class)->group(function(){
-                    Route::get('/image-upload', 'index')->name('image.form');
-                    Route::post('/upload-image', 'storeImage')->name('image.store');
-                });
+            //      Route::get('/livre', 'index')->name('livre.index');
+            //      Route::get('/livre/create', 'create')->name('livre.create');
+            //      Route::get('/livre/{id}', 'show')->name('livre.show');
+            //      Route::get('/livre/{id}/edit', 'edit')->name('livre.edit');
 
 
-                Route::get('/livres', [LivreController::class, 'indexApi']);
+            //      Route::post('/livre', 'store');
+            //      Route::patch('/livre/{id}', 'update');
+            //      Route::delete('/livre/{id}', 'destroy');
+
+            //     });
+
+
+                // Route::get('/livres', [LivreController::class, 'indexApi']);
+
+
 });

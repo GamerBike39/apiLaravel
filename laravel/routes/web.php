@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/public', [LivreController::class, 'indexPublic'])->name('livre.indexPublic');
+Route::get('/livres', [LivreController::class, 'indexApi']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,4 +27,13 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/public', [LivreController::class, 'indexPublic'])->name('livre.indexPublic');
+
+Route::controller(LivreController::class)->group(function () {
+    Route::get('/livre', 'index')->name('livre.index');
+    Route::get('/livre/create', 'create')->name('livre.create');
+    Route::get('/livre/{id}', 'show')->name('livre.show');
+    Route::get('/livre/{id}/edit', 'edit')->name('livre.edit');
+    Route::post('/livre', 'store');
+    Route::patch('/livre/{id}', 'update');
+    Route::delete('/livre/{id}', 'destroy');
+   });

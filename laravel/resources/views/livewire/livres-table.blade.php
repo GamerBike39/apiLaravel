@@ -16,7 +16,7 @@
             <input type="text" name="search" id="search" class="form-control" placeholder="Rechercher un livre"
                 wire:model.debounce.200ms="search">
             <div class="col-lg-1 my-3">
-                <a class="btn btn-primary" href="{{ url('livre/create') }}">Ajouter </a>
+                <a class="btn btn-primary" href="{{ route('livre.create') }}">Ajouter </a>
             </div>
         </div>
 
@@ -89,6 +89,8 @@
         <div class="d-flex justify-content-center item-center">
             {{ $livres->links() }}
         </div>
+
+        <a href="http://127.0.0.1:8000/livres">Liste sous forme JSON</a>
 
     </div>
 </div>
