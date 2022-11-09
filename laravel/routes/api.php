@@ -23,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('/livres', [LivreController::class, 'indexApi']);
 
 // Route::middleware('auth:sanctum')->get('/livres', [LivreController::class, 'indexApi']);
+
+// Route::get('/livres', [LivreController::class, 'indexApi']);

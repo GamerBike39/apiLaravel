@@ -39,8 +39,8 @@
 
         <!-- Page Content -->
         <main>
-            {{-- {{ $slot }} --}}
-            @yield('content')
+            {{ $slot }}
+            {{-- @yield('content') --}}
         </main>
     </div>
     @livewireScripts

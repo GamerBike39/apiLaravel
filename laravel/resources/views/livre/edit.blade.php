@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-
-@section('content')
+<x-app-layout>
 
     <div class="container mt-5">
 
@@ -97,4 +94,4 @@
         });
     </script>
 
-@endsection
+</x-app-layout>
